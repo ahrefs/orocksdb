@@ -7,7 +7,7 @@ let main () =
   in
   let open_opts = Options.create () in
   Options.set_create_if_missing open_opts true;
-
+  Options.set_compression open_opts `Bz2;
   let db = open_db ~opts:open_opts "aname" in
 
   let () =

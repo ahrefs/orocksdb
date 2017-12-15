@@ -457,6 +457,28 @@ module Options = struct
   (* }; *)
   (* extern void rocksdb_options_set_compression(rocksdb_options_t*, int); *)
 
+
+  let compression_view =
+    let read = function
+      | 0 -> `No_compression
+      | 1 -> `Snappy
+      | 2 -> `Zlib
+      | 3 -> `Bz2
+      | 4 -> `Lz4
+      | other -> invalid_arg @@ Printf.sprintf "read_compression_view: invalid compression type: %d" other
+    in
+    let write = function
+      | `No_compression -> 0
+      | `Snappy -> 1
+      | `Zlib -> 2
+      | `Bz2 -> 3
+      | `Lz4 -> 4
+    in
+    Ctypes.view ~read ~write Ctypes.int
+
+  let set_compression =
+    create_setter "set_compression" compression_view
+
   (* enum { *)
   (*   rocksdb_level_compaction = 0, *)
   (*   rocksdb_universal_compaction = 1, *)
