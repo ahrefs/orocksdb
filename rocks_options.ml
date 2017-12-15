@@ -337,8 +337,8 @@ module Options = struct
 
   (* extern void rocksdb_options_set_allow_os_buffer( *)
   (*     rocksdb_options_t*, unsigned char); *)
-  let set_allow_os_buffer =
-    create_setter "set_allow_os_buffer" Views.bool_to_uchar
+  (* let set_allow_os_buffer = *)
+  (*   create_setter "set_allow_os_buffer" Views.bool_to_uchar *)
 
   (* extern void rocksdb_options_set_allow_mmap_reads( *)
   (*     rocksdb_options_t*, unsigned char); *)
@@ -387,8 +387,8 @@ module Options = struct
 
   (* extern void rocksdb_options_set_verify_checksums_in_compaction( *)
   (*     rocksdb_options_t*, unsigned char); *)
-  let set_verify_checksums_in_compaction =
-    create_setter "set_verify_checksums_in_compaction" Views.bool_to_uchar
+  (* let set_verify_checksums_in_compaction = *)
+  (*   create_setter "set_verify_checksums_in_compaction" Views.bool_to_uchar *)
 
   (* extern void rocksdb_options_set_max_sequential_skip_in_iterations( *)
   (*     rocksdb_options_t*, uint64_t); *)
@@ -396,8 +396,8 @@ module Options = struct
     create_setter "set_max_sequential_skip_in_iterations" Views.int_to_uint64_t
 
   (* extern void rocksdb_options_set_disable_data_sync(rocksdb_options_t*, int); *)
-  let set_disable_data_sync =
-    create_setter "set_disable_data_sync" int
+  (* let set_disable_data_sync = *)
+  (*   create_setter "set_disable_data_sync" int *)
 
   (* extern void rocksdb_options_set_disable_auto_compactions(rocksdb_options_t*, int); *)
   let set_disable_auto_compactions =
@@ -409,8 +409,8 @@ module Options = struct
     create_setter "set_delete_obsolete_files_period_micros" Views.int_to_uint64_t
 
   (* extern void rocksdb_options_set_source_compaction_factor(rocksdb_options_t*, int); *)
-  let set_source_compaction_factor =
-    create_setter "set_source_compaction_factor" int
+  (* let set_source_compaction_factor = *)
+  (*   create_setter "set_source_compaction_factor" int *)
 
   (* extern void rocksdb_options_prepare_for_bulk_load(rocksdb_options_t*\); *)
   (* extern void rocksdb_options_set_memtable_vector_rep(rocksdb_options_t*\); *)
@@ -429,8 +429,8 @@ module Options = struct
 
   (* extern void rocksdb_options_set_min_partial_merge_operands( *)
   (*     rocksdb_options_t*, uint32_t); *)
-  let set_min_partial_merge_operands =
-    create_setter "set_min_partial_merge_operands" Views.int_to_uint32_t
+  (* let set_min_partial_merge_operands = *)
+  (*   create_setter "set_min_partial_merge_operands" Views.int_to_uint32_t *)
 
   (* extern void rocksdb_options_set_bloom_locality( *)
   (*     rocksdb_options_t*, uint32_t); *)
