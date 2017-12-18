@@ -39,85 +39,85 @@ module Cache =
 
 module BlockBasedTableOptions =
   struct
-    include CreateConstructors(struct
-                                  let name = "block_based_table_options"
-                                  let constructor = "rocksdb_block_based_options_create"
-                                  let destructor  = "rocksdb_block_based_options_destroy"
-                                  let setter_prefix = "rocksdb_block_based_options_"
-                                end)
+    (* include CreateConstructors(struct *)
+    (*                               let name = "block_based_table_options" *)
+    (*                               let constructor = "rocksdb_block_based_options_create" *)
+    (*                               let destructor  = "rocksdb_block_based_options_destroy" *)
+    (*                               let setter_prefix = "rocksdb_block_based_options_" *)
+    (*                             end) *)
 
-    (* extern void rocksdb_block_based_options_set_block_size( *)
-    (*     rocksdb_block_based_table_options_t* options, size_t block_size); *)
-    let set_block_size =
-      create_setter "set_block_size" Views.int_to_size_t
+    (* (\* extern void rocksdb_block_based_options_set_block_size( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t* options, size_t block_size); *\) *)
+    (* let set_block_size = *)
+    (*   create_setter "set_block_size" Views.int_to_size_t *)
 
-    (* extern void rocksdb_block_based_options_set_block_size_deviation( *)
-    (*     rocksdb_block_based_table_options_t* options, int block_size_deviation); *)
-    let set_block_size_deviation =
-      create_setter "set_block_size_deviation" int
+    (* (\* extern void rocksdb_block_based_options_set_block_size_deviation( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t* options, int block_size_deviation); *\) *)
+    (* let set_block_size_deviation = *)
+    (*   create_setter "set_block_size_deviation" int *)
 
-    (* extern void rocksdb_block_based_options_set_block_restart_interval( *)
-    (*     rocksdb_block_based_table_options_t* options, int block_restart_interval); *)
-    let set_block_restart_interval =
-      create_setter "set_block_restart_interval" int
+    (* (\* extern void rocksdb_block_based_options_set_block_restart_interval( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t* options, int block_restart_interval); *\) *)
+    (* let set_block_restart_interval = *)
+    (*   create_setter "set_block_restart_interval" int *)
 
-    (* extern void rocksdb_block_based_options_set_filter_policy( *)
-    (*     rocksdb_block_based_table_options_t* options, *)
-    (*     rocksdb_filterpolicy_t* filter_policy); *)
-    (* let set_filter_policy = *)
-    (*   create_setter "set_filter_policy" TODO *)
+    (* (\* extern void rocksdb_block_based_options_set_filter_policy( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t* options, *\) *)
+    (* (\*     rocksdb_filterpolicy_t* filter_policy); *\) *)
+    (* (\* let set_filter_policy = *\) *)
+    (* (\*   create_setter "set_filter_policy" TODO *\) *)
 
-    (* extern void rocksdb_block_based_options_set_no_block_cache( *)
-    (*     rocksdb_block_based_table_options_t* options, *)
-    (*     unsigned char no_block_cache); *)
-    let set_no_block_cache =
-      create_setter "set_no_block_cache" Views.bool_to_uchar
+    (* (\* extern void rocksdb_block_based_options_set_no_block_cache( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t* options, *\) *)
+    (* (\*     unsigned char no_block_cache); *\) *)
+    (* let set_no_block_cache = *)
+    (*   create_setter "set_no_block_cache" Views.bool_to_uchar *)
 
-    (* extern void rocksdb_block_based_options_set_block_cache( *)
-    (*     rocksdb_block_based_table_options_t* options, rocksdb_cache_t* block_cache); *)
-    let set_block_cache =
-      create_setter "set_block_cache" Cache.t
+    (* (\* extern void rocksdb_block_based_options_set_block_cache( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t* options, rocksdb_cache_t* block_cache); *\) *)
+    (* let set_block_cache = *)
+    (*   create_setter "set_block_cache" Cache.t *)
 
-    (* extern void rocksdb_block_based_options_set_block_cache_compressed( *)
-    (*     rocksdb_block_based_table_options_t* options, *)
-    (*     rocksdb_cache_t* block_cache_compressed); *)
-    let set_block_cache_compressed =
-      create_setter "set_block_cache_compressed" Cache.t
+    (* (\* extern void rocksdb_block_based_options_set_block_cache_compressed( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t* options, *\) *)
+    (* (\*     rocksdb_cache_t* block_cache_compressed); *\) *)
+    (* let set_block_cache_compressed = *)
+    (*   create_setter "set_block_cache_compressed" Cache.t *)
 
-    (* extern void rocksdb_block_based_options_set_whole_key_filtering( *)
-    (*     rocksdb_block_based_table_options_t*, unsigned char); *)
-    let set_whole_key_filtering =
-      create_setter "set_whole_key_filtering" Views.bool_to_uchar
+    (* (\* extern void rocksdb_block_based_options_set_whole_key_filtering( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t*, unsigned char); *\) *)
+    (* let set_whole_key_filtering = *)
+    (*   create_setter "set_whole_key_filtering" Views.bool_to_uchar *)
 
-    (* extern void rocksdb_block_based_options_set_format_version( *)
-    (*     rocksdb_block_based_table_options_t*, int); *)
-    let set_format_version =
-      create_setter "set_format_version" int
+    (* (\* extern void rocksdb_block_based_options_set_format_version( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t*, int); *\) *)
+    (* let set_format_version = *)
+    (*   create_setter "set_format_version" int *)
 
-    module IndexType =
-      struct
-        type t = int
-        let binary_search = 0
-        let hash_search = 1
-      end
-    (* enum { *)
-    (*   rocksdb_block_based_table_index_type_binary_search = 0, *)
-    (*   rocksdb_block_based_table_index_type_hash_search = 1, *)
-    (* }; *)
-    (* extern void rocksdb_block_based_options_set_index_type( *)
-    (*     rocksdb_block_based_table_options_t*, int); // uses one of the above enums *)
-    let set_index_type =
-      create_setter "set_index_type" int
+    (* module IndexType = *)
+    (*   struct *)
+    (*     type t = int *)
+    (*     let binary_search = 0 *)
+    (*     let hash_search = 1 *)
+    (*   end *)
+    (* (\* enum { *\) *)
+    (* (\*   rocksdb_block_based_table_index_type_binary_search = 0, *\) *)
+    (* (\*   rocksdb_block_based_table_index_type_hash_search = 1, *\) *)
+    (* (\* }; *\) *)
+    (* (\* extern void rocksdb_block_based_options_set_index_type( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t*, int); // uses one of the above enums *\) *)
+    (* let set_index_type = *)
+    (*   create_setter "set_index_type" int *)
 
-    (* extern void rocksdb_block_based_options_set_hash_index_allow_collision( *)
-    (*     rocksdb_block_based_table_options_t*, unsigned char); *)
-    let set_hash_index_allow_collision =
-      create_setter "set_hash_index_allow_collision" Views.bool_to_uchar
+    (* (\* extern void rocksdb_block_based_options_set_hash_index_allow_collision( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t*, unsigned char); *\) *)
+    (* let set_hash_index_allow_collision = *)
+    (*   create_setter "set_hash_index_allow_collision" Views.bool_to_uchar *)
 
-    (* extern void rocksdb_block_based_options_set_cache_index_and_filter_blocks( *)
-    (*     rocksdb_block_based_table_options_t*, unsigned char); *)
-    let set_cache_index_and_filter_blocks =
-      create_setter "set_cache_index_and_filter_blocks" Views.bool_to_uchar
+    (* (\* extern void rocksdb_block_based_options_set_cache_index_and_filter_blocks( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t*, unsigned char); *\) *)
+    (* let set_cache_index_and_filter_blocks = *)
+    (*   create_setter "set_cache_index_and_filter_blocks" Views.bool_to_uchar *)
   end
 
 module Options = struct
@@ -490,8 +490,8 @@ module Options = struct
 
   (* extern void rocksdb_options_set_block_based_table_factory( *)
   (*     rocksdb_options_t *opt, rocksdb_block_based_table_options_t* table_options); *)
-  let set_block_based_table_factory =
-    create_setter "set_block_based_table_factory" BlockBasedTableOptions.t
+  (* let set_block_based_table_factory = *)
+  (*   create_setter "set_block_based_table_factory" BlockBasedTableOptions.t *)
 end
 
 module WriteOptions = struct
