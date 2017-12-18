@@ -464,6 +464,7 @@ module Options = struct
       | 2 -> `Zlib
       | 3 -> `Bz2
       | 4 -> `Lz4
+      | 5 -> `Lz4hc
       | other -> invalid_arg @@ Printf.sprintf "read_compression_view: invalid compression type: %d" other
     in
     let write = function
@@ -472,6 +473,7 @@ module Options = struct
       | `Zlib -> 2
       | `Bz2 -> 3
       | `Lz4 -> 4
+      | `Lz4hc -> 4
     in
     Ctypes.view ~read ~write Ctypes.int
 
