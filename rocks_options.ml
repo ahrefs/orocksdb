@@ -9,31 +9,31 @@ module Cache =
 
     let get_pointer = get_pointer
 
-    let create_no_gc =
-      (* extern rocksdb_cache_t* rocksdb_cache_create_lru(size_t capacity); *)
-      foreign
-        "rocksdb_cache_create_lru"
-        (Views.int_to_size_t @-> returning t)
+    (* let create_no_gc = *)
+    (*   (\* extern rocksdb_cache_t* rocksdb_cache_create_lru(size_t capacity); *\) *)
+    (*   foreign *)
+    (*     "rocksdb_cache_create_lru" *)
+    (*     (Views.int_to_size_t @-> returning t) *)
 
-    let destroy =
-      (* extern void rocksdb_cache_destroy(rocksdb_cache_t* cache); *)
-      make_destroy t "rocksdb_cache_destroy"
+    (* let destroy = *)
+    (*   (\* extern void rocksdb_cache_destroy(rocksdb_cache_t* cache); *\) *)
+    (*   make_destroy t "rocksdb_cache_destroy" *)
 
-    let create capacity =
-      let t = create_no_gc capacity in
-      Gc.finalise destroy t;
-      t
+    (* let create capacity = *)
+    (*   let t = create_no_gc capacity in *)
+    (*   Gc.finalise destroy t; *)
+    (*   t *)
 
-    let with_t capacity f =
-      let t = create_no_gc capacity in
-      finalize
-        (fun () -> f t)
-        (fun () -> destroy t)
+    (* let with_t capacity f = *)
+    (*   let t = create_no_gc capacity in *)
+    (*   finalize *)
+    (*     (fun () -> f t) *)
+    (*     (fun () -> destroy t) *)
 
-    let create_setter property_name property_typ =
-      foreign
-        ("rocksdb_cache_" ^ property_name)
-        (t @-> property_typ @-> returning void)
+    (* let create_setter property_name property_typ = *)
+    (*   foreign *)
+    (*     ("rocksdb_cache_" ^ property_name) *)
+    (*     (t @-> property_typ @-> returning void) *)
 
   end
 
