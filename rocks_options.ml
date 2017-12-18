@@ -473,7 +473,7 @@ module Options = struct
       | `Zlib -> 2
       | `Bz2 -> 3
       | `Lz4 -> 4
-      | `Lz4hc -> 4
+      | `Lz4hc -> 5
     in
     Ctypes.view ~read ~write Ctypes.int
 
