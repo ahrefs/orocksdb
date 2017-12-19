@@ -208,12 +208,22 @@ module Options = struct
   (* extern void rocksdb_options_set_prefix_extractor( *)
   (*     rocksdb_options_t*, rocksdb_slicetransform_t*\); *)
   (* extern void rocksdb_options_set_num_levels(rocksdb_options_t*, int); *)
+
   (* extern void rocksdb_options_set_level0_file_num_compaction_trigger( *)
   (*     rocksdb_options_t*, int); *)
+  let set_level0_file_num_compaction_trigger =
+    create_setter "set_level0_file_num_compaction_trigger" Views.int_to_uint64_t
+
   (* extern void rocksdb_options_set_level0_slowdown_writes_trigger( *)
   (*     rocksdb_options_t*, int); *)
+  let set_level0_slowdown_writes_trigger =
+    create_setter "set_level0_slowdown_writes_trigger" Views.int_to_uint64_t
+
   (* extern void rocksdb_options_set_level0_stop_writes_trigger( *)
   (*     rocksdb_options_t*, int); *)
+  let set_level0_stop_writes_trigger =
+    create_setter "set_level0_stop_writes_trigger" Views.int_to_uint64_t
+
   (* extern void rocksdb_options_set_max_mem_compaction_level( *)
   (*     rocksdb_options_t*, int); *)
   (* extern void rocksdb_options_set_target_file_size_base( *)
