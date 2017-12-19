@@ -27,6 +27,7 @@ let main () =
        | None -> "None") in
   print_string_option (read "mykey");
   print_string_option (read "mykey2");
+  print_endline @@ get_stat_string db;
   close db
 
 let () =
