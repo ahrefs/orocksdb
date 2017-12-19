@@ -69,4 +69,6 @@ module type ROCKS = sig
 
   val get_stat_string : t -> string
 
+  val compact_db : t -> unit
+
 end
