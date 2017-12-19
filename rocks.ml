@@ -426,6 +426,14 @@ and RocksDb : Rocks_intf.ROCKS with type batch := WriteBatch.t = struct
       Gc.finalise (fun stats -> free (to_voidp stats)) stats;
       string
 
+  (* FIXME: quick and dirty implementation, use a proper range type. *)
+  let compact_range_raw =
+    foreign
+      "rocksdb_compact_range"
+      (t @-> ptr_opt char @-> int @-> ptr_opt char @-> int @-> returning void)
+
+  let compact_db t = compact_range_raw t None 0 None 0
+
 end
 
 include RocksDb
