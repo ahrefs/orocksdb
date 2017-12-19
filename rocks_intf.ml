@@ -66,4 +66,7 @@ module type ROCKS = sig
   val write : ?opts:WriteOptions.t -> t -> batch -> unit
 
   val flush : ?opts:FlushOptions.t -> t -> unit
+
+  val get_stat_string : t -> string
+
 end

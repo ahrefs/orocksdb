@@ -412,6 +412,20 @@ and RocksDb : Rocks_intf.ROCKS with type batch := WriteBatch.t = struct
     match opts with
     | None -> FlushOptions.with_t inner
     | Some opts -> inner opts
+
+  let get_property_value_raw =
+    foreign
+      "rocksdb_property_value"
+      (t @-> string @-> returning (ptr_opt char))
+
+  let get_stat_string t =
+    match get_property_value_raw t "rocksdb.stats" with
+    | None -> "rocksdb.stats: returned None"
+    | Some stats ->
+      let string = coerce (ptr char) string stats in
+      Gc.finalise (fun stats -> free (to_voidp stats)) stats;
+      string
+
 end
 
 include RocksDb
