@@ -35,7 +35,8 @@ module Cache =
         ("rocksdb_cache_" ^ property_name)
         (t @-> property_typ @-> returning void)
 
-    let set_capacity = create_setter "set_capacity" int
+    (* Disabled to support Debian stable's version, 4.5f *)
+    (* let set_capacity = create_setter "set_capacity" int *)
   end
 
 module BlockBasedTableOptions =
