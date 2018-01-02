@@ -2,42 +2,42 @@ open Ctypes
 open Foreign
 open Rocks_common
 
-module Cache =
-  struct
-    type nonrec t = t
-    let t = t
+(* module Cache = *)
+(*   struct *)
+(*     type nonrec t = t *)
+(*     let t = t *)
 
-    let get_pointer = get_pointer
+(*     let get_pointer = get_pointer *)
 
-    let create_no_gc =
-      (* extern rocksdb_cache_t* rocksdb_cache_create_lru(size_t capacity); *)
-      foreign
-        "rocksdb_cache_create_lru"
-        (Views.int_to_size_t @-> returning t)
+(*     let create_no_gc = *)
+(*       (\* extern rocksdb_cache_t* rocksdb_cache_create_lru(size_t capacity); *\) *)
+(*       foreign *)
+(*         "rocksdb_cache_create_lru" *)
+(*         (Views.int_to_size_t @-> returning t) *)
 
-    let destroy =
-      (* extern void rocksdb_cache_destroy(rocksdb_cache_t* cache); *)
-      make_destroy t "rocksdb_cache_destroy"
+(*     let destroy = *)
+(*       (\* extern void rocksdb_cache_destroy(rocksdb_cache_t* cache); *\) *)
+(*       make_destroy t "rocksdb_cache_destroy" *)
 
-    let create capacity =
-      let t = create_no_gc capacity in
-      Gc.finalise destroy t;
-      t
+(*     let create capacity = *)
+(*       let t = create_no_gc capacity in *)
+(*       Gc.finalise destroy t; *)
+(*       t *)
 
-    let with_t capacity f =
-      let t = create_no_gc capacity in
-      finalize
-        (fun () -> f t)
-        (fun () -> destroy t)
+(*     let with_t capacity f = *)
+(*       let t = create_no_gc capacity in *)
+(*       finalize *)
+(*         (fun () -> f t) *)
+(*         (fun () -> destroy t) *)
 
-    let create_setter property_name property_typ =
-      foreign
-        ("rocksdb_cache_" ^ property_name)
-        (t @-> property_typ @-> returning void)
+(*     let create_setter property_name property_typ = *)
+(*       foreign *)
+(*         ("rocksdb_cache_" ^ property_name) *)
+(*         (t @-> property_typ @-> returning void) *)
 
-    (* Disabled to support Debian stable's version, 4.5f *)
-    (* let set_capacity = create_setter "set_capacity" int *)
-  end
+(*     (\* Disabled to support Debian stable's version, 4.5f *\) *)
+(*     (\* let set_capacity = create_setter "set_capacity" int *\) *)
+(*   end *)
 
 module BlockBasedTableOptions =
   struct
@@ -75,16 +75,16 @@ module BlockBasedTableOptions =
     let set_no_block_cache =
       create_setter "set_no_block_cache" Views.bool_to_uchar
 
-    (* extern void rocksdb_block_based_options_set_block_cache( *)
-    (*     rocksdb_block_based_table_options_t* options, rocksdb_cache_t* block_cache); *)
-    let set_block_cache =
-      create_setter "set_block_cache" Cache.t
+    (* (\* extern void rocksdb_block_based_options_set_block_cache( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t* options, rocksdb_cache_t* block_cache); *\) *)
+    (* let set_block_cache = *)
+    (*   create_setter "set_block_cache" Cache.t *)
 
-    (* extern void rocksdb_block_based_options_set_block_cache_compressed( *)
-    (*     rocksdb_block_based_table_options_t* options, *)
-    (*     rocksdb_cache_t* block_cache_compressed); *)
-    let set_block_cache_compressed =
-      create_setter "set_block_cache_compressed" Cache.t
+    (* (\* extern void rocksdb_block_based_options_set_block_cache_compressed( *\) *)
+    (* (\*     rocksdb_block_based_table_options_t* options, *\) *)
+    (* (\*     rocksdb_cache_t* block_cache_compressed); *\) *)
+    (* let set_block_cache_compressed = *)
+    (*   create_setter "set_block_cache_compressed" Cache.t *)
 
     (* extern void rocksdb_block_based_options_set_whole_key_filtering( *)
     (*     rocksdb_block_based_table_options_t*, unsigned char); *)

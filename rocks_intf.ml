@@ -42,7 +42,6 @@ module type ROCKS = sig
   module ReadOptions : module type of ReadOptions
   module WriteOptions : module type of WriteOptions
   module FlushOptions : module type of FlushOptions
-  module Cache : module type of Cache
   module BlockBasedTableOptions : module type of BlockBasedTableOptions
 
   type t
